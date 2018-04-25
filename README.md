@@ -60,6 +60,35 @@ Open you favorite editor and copy/paste this into `jicofo.json`:
 
 > Adapt the `"engines": []` and `"containerOptions": {}` configurations to match your Docker setup
 
+## Tell diversify-mvn what to do
+What `diversify-mvn` will do is:
+ - create a mutant of the original `jicofo` project by randomly change the dependencies versions
+ - create a Docker image of that mutant using the Dockerfile at the root of the `jicofo` project (**you have to add that, see below**)
+ - run that mutant Docker image and see if it fails (if the exit code of the Docker container is **0** then the mutant is **valid**)
+
+So we need to add a `Dockerfile` to the `jicofo` project.  
+Let's do something simple to test the validity of the mutant: **just run the tests :)**
+
+Go into the `jicofo` project and create a Dockerfile:
+```sh
+cd jicofo
+touch Dockerfile
+```
+
+Open the `Dockerfile` with your favorite editor and copy/paste this:
+```Dockerfile
+FROM     maven:3.5.0-jdk-8-alpine
+
+ADD      . /usr/src/app
+WORKDIR  /usr/src/app
+CMD      ["mvn", "test"]
+```
+
+Go back
+```sh
+cd ..
+```
+
 ## Diversify it
 Alright, you can now start the process and grab a coffee, because it will take forever to complete all the possible mutations (13^6)
 ```sh
