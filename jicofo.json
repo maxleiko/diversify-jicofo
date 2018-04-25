@@ -1,0 +1,19 @@
+{
+  "appPath": "jicofo",
+  "versionsCount": 5,
+  "outputDir": ".results",
+  "overwriteContainer": true,
+  "engines": [
+    { "host": "10.0.0.1", "port": 2375 },
+    { "host": "10.0.0.3", "port": 2375 },
+    { "host": "10.0.0.4", "port": 2375 },
+    { "host": "10.0.0.5", "port": 2375 },
+    { "host": "10.0.0.6", "port": 2375 },
+    { "host": "10.0.0.7", "port": 2375 }
+  ],
+  "blacklist": [],
+  "containerOptions": {
+    "VolumeDriver": "nfs",
+    "Binds": ["10.0.0.1/opt/data/leiko/.m2:/root/.m2:rw"]
+  }
+}
